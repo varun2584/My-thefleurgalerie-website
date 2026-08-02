@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Fleur Galerie | Luxury Krishna Jhulas &amp; Torans</title>
+<meta name="description" content="The Fleur Galerie — handcrafted luxury Krishna Jhulas, Aasans &amp; Torans. Direct to consumer, shipping worldwide." />
+<link rel="icon" href="assets/images/profile.jpg" type="image/jpeg" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          maroon: { DEFAULT: '#6b1620', dark: '#4a0f17', light: '#8c2230' },
+          gold: { DEFAULT: '#c9a24b', light: '#e6cd8a', dark: '#a3803a' },
+          cream: '#faf6ee',
+        },
+        fontFamily: {
+          serif: ['"Cormorant Garamond"', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background-color: #faf6ee; }
+  h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', serif; }
+  .gallery-item { position: relative; overflow: hidden; }
+  .gallery-item img { transition: transform 0.6s ease; }
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-overlay { opacity: 0; transition: opacity 0.35s ease; background: linear-gradient(to top, rgba(20,4,7,0.88) 0%, rgba(20,4,7,0.25) 55%, transparent 100%); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .divider-ornament::before, .divider-ornament::after { content: ''; height: 1px; flex: 1; background: currentColor; opacity: 0.35; }
+</style>
+</head>
+<body class="text-maroon-dark antialiased">
+
+<!-- Nav -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-gold/30">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 sm:h-20">
+    <a href="#top" class="flex items-center gap-3">
+      <img src="assets/images/profile.jpg" alt="The Fleur Galerie logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-gold" />
+      <span class="font-display text-lg sm:text-2xl tracking-wide">The Fleur Galerie</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest text-maroon">
+      <a href="#about" class="hover:text-gold-dark transition-colors">About</a>
+      <a href="#craft" class="hover:text-gold-dark transition-colors">Our Craft</a>
+      <a href="#gallery" class="hover:text-gold-dark transition-colors">Gallery</a>
+      <a href="#contact" class="hover:text-gold-dark transition-colors">Order</a>
+    </nav>
+    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 bg-maroon hover:bg-maroon-dark text-cream text-sm px-5 py-2.5 rounded-full transition-colors">
+      DM to Order
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="top" class="relative pt-32 pb-20 sm:pt-44 sm:pb-28 px-5 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-gold/10 via-transparent to-transparent -z-10"></div>
+  <div class="max-w-4xl mx-auto text-center">
+    <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover ring-4 ring-gold shadow-xl mx-auto mb-6" />
+    <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-gold-dark font-medium mb-4">@the_fleur_galerie</p>
+    <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight text-maroon-dark">
+      Luxury Krishna<br class="hidden sm:block" /> Jhulas &amp; Torans
+    </h1>
+    <p class="mt-6 text-base sm:text-lg text-maroon/80 max-w-xl mx-auto leading-relaxed">
+      Handcrafted devotional artistry for Thakur ji — direct to consumer, shipped worldwide, made to be treasured.
+    </p>
+    <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#gallery" class="w-full sm:w-auto bg-maroon hover:bg-maroon-dark text-cream px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">View Gallery</a>
+      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="w-full sm:w-auto border border-maroon/40 hover:border-gold hover:text-gold-dark px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="px-5 py-16 sm:py-24 bg-white/60">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
+      <span class="font-display text-2xl px-2">✦</span>
+    </div>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-6">About Us</h2>
+    <div class="space-y-3 text-maroon/85 text-base sm:text-lg leading-relaxed">
+      <p>✨ Luxury Krishna Jhulas &amp; Torans</p>
+      <p>🛍️ Direct to Consumer &mdash; Retail Only</p>
+      <p>🚫 No Resellers or Wholesalers</p>
+      <p>📦 Shipping Worldwide 🌍</p>
+      <p class="pt-2 font-medium text-maroon-dark">👇 DM us to order</p>
+    </div>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 text-xs sm:text-sm uppercase tracking-widest text-maroon/70">
+      <div class="text-center">
+        <p class="font-display text-2xl text-maroon-dark font-semibold">742+</p>
+        <p>Creations</p>
+      </div>
+      <div class="hidden sm:block w-px h-8 bg-gold/40"></div>
+      <div class="text-center">
+        <p class="font-display text-2xl text-maroon-dark font-semibold">13.3K</p>
+        <p>Followers</p>
+      </div>
+      <div class="hidden sm:block w-px h-8 bg-gold/40"></div>
+      <div class="text-center">
+        <p class="font-display text-2xl text-maroon-dark font-semibold">Worldwide</p>
+        <p>Shipping</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Craft -->
+<section id="craft" class="px-5 py-16 sm:py-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
+        <span class="font-display text-2xl px-2">✦</span>
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold">Our Craft</h2>
+      <p class="mt-3 text-maroon/70 max-w-xl mx-auto">Every jhula, aasan and toran is handmade with devotion — designed for Thakur ji, finished to last generations.</p>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
+        <img src="assets/images/post-6.jpg" alt="Thakur ji ka jhula" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
+        <h3 class="font-display text-2xl font-semibold mb-2">Jhulas</h3>
+        <p class="text-sm text-maroon/70 leading-relaxed">Ornate swings crafted for Thakur ji, blending intricate embroidery with heirloom-quality finishing.</p>
+      </div>
+      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
+        <img src="assets/images/post-12.jpg" alt="Thakur ji ka aasan" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
+        <h3 class="font-display text-2xl font-semibold mb-2">Aasans</h3>
+        <p class="text-sm text-maroon/70 leading-relaxed">Regal seating sets designed with rich fabrics and fine detailing, fit for daily seva.</p>
+      </div>
+      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
+        <img src="assets/images/post-2.jpg" alt="Radhey Radhey" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
+        <h3 class="font-display text-2xl font-semibold mb-2">Torans</h3>
+        <p class="text-sm text-maroon/70 leading-relaxed">Beautifully draped door and mandir torans that bring festive elegance into every home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="px-5 py-16 sm:py-24 bg-white/60">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
+        <span class="font-display text-2xl px-2">✦</span>
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold">Gallery</h2>
+      <p class="mt-3 text-maroon/70 max-w-xl mx-auto">Our latest creations, straight from Instagram.</p>
+    </div>
+    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+  </div>
+</section>
+
+<!-- Contact / CTA -->
+<section id="contact" class="px-5 py-20 sm:py-28 bg-maroon-dark text-cream text-center">
+  <div class="max-w-2xl mx-auto reveal">
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-4">Ready to Order?</h2>
+    <p class="text-cream/80 mb-8 leading-relaxed">DM us on Instagram with your requirements — sizes, colors and custom designs available. Retail only, shipped worldwide.</p>
+    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-maroon-dark font-medium px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">
+      Message Us on Instagram
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="px-5 py-10 text-center text-sm text-maroon/60 bg-cream">
+  <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-9 h-9 rounded-full object-cover mx-auto mb-3 ring-1 ring-gold/50" />
+  <p class="font-display text-lg text-maroon-dark mb-1">The Fleur Galerie</p>
+  <p>&copy; <span id="year"></span> The Fleur Galerie. All rights reserved.</p>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/90 px-4">
+  <button id="lightbox-close" class="absolute top-5 right-5 text-cream text-3xl leading-none hover:text-gold transition-colors" aria-label="Close">&times;</button>
+  <div class="max-w-3xl w-full text-center">
+    <img id="lightbox-img" src="" alt="" class="max-h-[75vh] w-auto mx-auto rounded-lg shadow-2xl" />
+    <p id="lightbox-caption" class="text-cream/90 mt-4 text-sm sm:text-base"></p>
+    <a id="lightbox-link" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-gold hover:text-gold-light text-xs uppercase tracking-widest border border-gold/50 rounded-full px-5 py-2">View on Instagram</a>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const posts = [
+    { img: 'assets/images/post-1.jpg', caption: 'Radhey Radhey #thefleurgalerie', permalink: 'https://www.instagram.com/reel/DbdWcZ8J_65/', type: 'Reel' },
+    { img: 'assets/images/post-2.jpg', caption: '#thefleurgalerie', permalink: 'https://www.instagram.com/reel/DbYNH8YpInP/', type: 'Reel' },
+    { img: 'assets/images/post-3.jpg', caption: 'Radhey Radhey — Thakur ji ka aasan', permalink: 'https://www.instagram.com/reel/DbVJMyTpbzN/', type: 'Reel' },
+    { img: 'assets/images/post-4.jpg', caption: '#thefleurgalerie #handmade', permalink: 'https://www.instagram.com/reel/DbTAneypN6B/', type: 'Reel' },
+    { img: 'assets/images/post-5.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbQtc6Ip1mi/', type: 'Photo' },
+    { img: 'assets/images/post-6.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbQtHIIJ2Q5/', type: 'Photo' },
+    { img: 'assets/images/post-7.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbQs4tFpRmO/', type: 'Photo' },
+    { img: 'assets/images/post-8.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbKh6X7xuGK/', type: 'Photo' },
+    { img: 'assets/images/post-9.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbKhaENR3Ly/', type: 'Photo' },
+    { img: 'assets/images/post-10.jpg', caption: 'Thakur ji ka jhula', permalink: 'https://www.instagram.com/p/DbIsykPpu2h/', type: 'Photo' },
+    { img: 'assets/images/post-11.jpg', caption: 'Thakur ji ka jhula and aasan', permalink: 'https://www.instagram.com/reel/DbH3vWDpIq8/', type: 'Reel' },
+    { img: 'assets/images/post-12.jpg', caption: 'Thakur ji ka aasan', permalink: 'https://www.instagram.com/p/DbGonxCzbEF/', type: 'Photo' },
+  ];
+
+  const grid = document.getElementById('gallery-grid');
+  posts.forEach((post, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item reveal aspect-square rounded-xl cursor-pointer bg-maroon/5';
+    item.innerHTML = `
+      <img src="${post.img}" alt="${post.caption}" loading="lazy" class="w-full h-full object-cover rounded-xl" />
+      <div class="gallery-overlay absolute inset-0 rounded-xl flex flex-col justify-end p-3 sm:p-4">
+        <span class="text-gold-light text-[10px] uppercase tracking-widest mb-1">${post.type}</span>
+        <p class="text-cream text-xs sm:text-sm leading-snug line-clamp-3">${post.caption}</p>
+      </div>
+    `;
+    item.addEventListener('click', () => openLightbox(post));
+    grid.appendChild(item);
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxLink = document.getElementById('lightbox-link');
+
+  function openLightbox(post) {
+    lightboxImg.src = post.img;
+    lightboxImg.alt = post.caption;
+    lightboxCaption.textContent = post.caption;
+    lightboxLink.href = post.permalink;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
