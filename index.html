@@ -9,19 +9,19 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          maroon: { DEFAULT: '#6b1620', dark: '#4a0f17', light: '#8c2230' },
-          gold: { DEFAULT: '#c9a24b', light: '#e6cd8a', dark: '#a3803a' },
-          cream: '#faf6ee',
+          charcoal: { DEFAULT: '#211f1c', dark: '#141311', light: '#4a463f' },
+          champagne: { DEFAULT: '#c6a465', light: '#e6d5ab', dark: '#a1824f' },
+          cream: { DEFAULT: '#faf8f3', dark: '#f1ecdf' },
         },
         fontFamily: {
-          serif: ['"Cormorant Garamond"', 'serif'],
-          sans: ['Inter', 'sans-serif'],
+          serif: ['"Playfair Display"', 'serif'],
+          sans: ['"Plus Jakarta Sans"', 'sans-serif'],
         },
       },
     },
@@ -29,160 +29,196 @@
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background-color: #faf6ee; }
-  h1, h2, h3, .font-display { font-family: 'Cormorant Garamond', serif; }
-  .gallery-item { position: relative; overflow: hidden; }
-  .gallery-item img { transition: transform 0.6s ease; }
-  .gallery-item:hover img { transform: scale(1.08); }
-  .gallery-overlay { opacity: 0; transition: opacity 0.35s ease; background: linear-gradient(to top, rgba(20,4,7,0.88) 0%, rgba(20,4,7,0.25) 55%, transparent 100%); }
-  .gallery-item:hover .gallery-overlay { opacity: 1; }
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf8f3; }
+  h1, h2, h3, .font-display { font-family: 'Playfair Display', serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .divider-ornament::before, .divider-ornament::after { content: ''; height: 1px; flex: 1; background: currentColor; opacity: 0.35; }
+  .ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+  .ornament::before, .ornament::after { content: ''; height: 1px; width: 2.5rem; background: #c6a465; opacity: 0.6; }
+  .btn-shimmer { position: relative; overflow: hidden; }
+  .btn-shimmer span { position: relative; z-index: 1; }
+  .btn-shimmer::after { content: ''; position: absolute; inset: 0; background: currentColor; opacity: 0; transition: opacity 0.4s ease; }
+  .gallery-overlay { background: linear-gradient(to top, rgba(20,19,17,0.9) 0%, rgba(20,19,17,0.15) 60%, transparent 100%); }
+  ::selection { background: #c6a465; color: #faf8f3; }
 </style>
 </head>
-<body class="text-maroon-dark antialiased">
+<body class="text-charcoal antialiased">
 
-<!-- Nav -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-gold/30">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 sm:h-20">
-    <a href="#top" class="flex items-center gap-3">
-      <img src="assets/images/profile.jpg" alt="The Fleur Galerie logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-gold" />
-      <span class="font-display text-lg sm:text-2xl tracking-wide">The Fleur Galerie</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest text-maroon">
-      <a href="#about" class="hover:text-gold-dark transition-colors">About</a>
-      <a href="#craft" class="hover:text-gold-dark transition-colors">Our Craft</a>
-      <a href="#gallery" class="hover:text-gold-dark transition-colors">Gallery</a>
-      <a href="#contact" class="hover:text-gold-dark transition-colors">Order</a>
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-cream/85 backdrop-blur-md border-b border-champagne/25">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-18 sm:h-24 grid grid-cols-2 md:grid-cols-3 items-center py-4">
+    <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.2em] text-charcoal-light">
+      <a href="#about" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">About</a>
+      <a href="#craft" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Our Craft</a>
     </nav>
-    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 bg-maroon hover:bg-maroon-dark text-cream text-sm px-5 py-2.5 rounded-full transition-colors">
-      DM to Order
+
+    <a href="#top" class="flex md:justify-self-center items-center gap-3 justify-self-start">
+      <img src="assets/images/profile.jpg" alt="The Fleur Galerie logo" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover ring-1 ring-champagne" />
+      <span class="font-display text-base sm:text-xl tracking-[0.08em]">The&nbsp;Fleur&nbsp;Galerie</span>
     </a>
+
+    <div class="flex items-center justify-end gap-8">
+      <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.2em] text-charcoal-light">
+        <a href="#gallery" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Gallery</a>
+        <a href="#contact" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Order</a>
+      </nav>
+      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+         class="btn-shimmer inline-flex items-center bg-charcoal hover:text-cream text-cream text-[11px] sm:text-xs uppercase tracking-[0.15em] px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300">
+        <span>DM to Order</span>
+      </a>
+    </div>
   </div>
 </header>
 
+<main>
+
 <!-- Hero -->
-<section id="top" class="relative pt-32 pb-20 sm:pt-44 sm:pb-28 px-5 overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-gold/10 via-transparent to-transparent -z-10"></div>
+<section id="top" class="relative min-h-[92vh] flex items-center justify-center px-5 pt-24 pb-16 overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(198,164,101,0.14),_transparent_60%)]"></div>
   <div class="max-w-4xl mx-auto text-center">
-    <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover ring-4 ring-gold shadow-xl mx-auto mb-6" />
-    <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-gold-dark font-medium mb-4">@the_fleur_galerie</p>
-    <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight text-maroon-dark">
-      Luxury Krishna<br class="hidden sm:block" /> Jhulas &amp; Torans
+    <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover ring-1 ring-champagne mx-auto mb-8" />
+    <p class="uppercase tracking-[0.4em] text-[11px] sm:text-xs text-champagne-dark font-medium mb-6">@the_fleur_galerie &middot; Est. Direct-to-Consumer</p>
+    <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-medium leading-[1.05] tracking-tight text-charcoal-dark">
+      Luxury Krishna<br />
+      <span class="italic text-champagne-dark">Jhulas</span> &amp; Torans
     </h1>
-    <p class="mt-6 text-base sm:text-lg text-maroon/80 max-w-xl mx-auto leading-relaxed">
-      Handcrafted devotional artistry for Thakur ji — direct to consumer, shipped worldwide, made to be treasured.
+    <p class="mt-8 text-base sm:text-lg text-charcoal-light max-w-xl mx-auto leading-relaxed font-light">
+      Handcrafted devotional artistry for Thakur ji — direct to consumer, shipped worldwide, made to be treasured for generations.
     </p>
-    <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#gallery" class="w-full sm:w-auto bg-maroon hover:bg-maroon-dark text-cream px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">View Gallery</a>
-      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="w-full sm:w-auto border border-maroon/40 hover:border-gold hover:text-gold-dark px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">Follow on Instagram</a>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#gallery" class="btn-shimmer w-full sm:w-auto bg-charcoal hover:text-cream text-cream px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300">
+        <span>View Gallery</span>
+      </a>
+      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+         class="w-full sm:w-auto border border-charcoal/25 hover:border-champagne hover:text-champagne-dark px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.28em]">
+        Follow on Instagram
+      </a>
     </div>
   </div>
 </section>
 
 <!-- About -->
-<section id="about" class="px-5 py-16 sm:py-24 bg-white/60">
+<section id="about" class="px-5 py-20 sm:py-28 border-t border-champagne/20">
   <div class="max-w-3xl mx-auto text-center reveal">
-    <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
-      <span class="font-display text-2xl px-2">✦</span>
+    <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-dark">About Us</span></div>
+    <h2 class="font-display text-3xl sm:text-5xl font-medium mb-8 leading-tight">Devotion, woven by hand</h2>
+    <div class="space-y-2.5 text-charcoal-light text-base sm:text-lg leading-relaxed font-light">
+      <p>Luxury Krishna Jhulas &amp; Torans, crafted with heirloom-quality detail.</p>
+      <p>Direct to consumer &mdash; retail only. No resellers or wholesalers.</p>
+      <p>Shipping worldwide, from our atelier to your mandir.</p>
     </div>
-    <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-6">About Us</h2>
-    <div class="space-y-3 text-maroon/85 text-base sm:text-lg leading-relaxed">
-      <p>✨ Luxury Krishna Jhulas &amp; Torans</p>
-      <p>🛍️ Direct to Consumer &mdash; Retail Only</p>
-      <p>🚫 No Resellers or Wholesalers</p>
-      <p>📦 Shipping Worldwide 🌍</p>
-      <p class="pt-2 font-medium text-maroon-dark">👇 DM us to order</p>
-    </div>
-    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 text-xs sm:text-sm uppercase tracking-widest text-maroon/70">
+    <a href="#contact" class="inline-block mt-6 text-xs uppercase tracking-[0.2em] text-champagne-dark border-b border-champagne/50 pb-1 hover:tracking-[0.28em] hover:border-champagne transition-all duration-300">DM us to order</a>
+
+    <div class="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-16">
       <div class="text-center">
-        <p class="font-display text-2xl text-maroon-dark font-semibold">742+</p>
-        <p>Creations</p>
+        <p class="font-display text-3xl sm:text-4xl text-charcoal-dark font-medium">742+</p>
+        <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal-light">Creations</p>
       </div>
-      <div class="hidden sm:block w-px h-8 bg-gold/40"></div>
+      <div class="hidden sm:block w-px h-10 bg-champagne/40"></div>
       <div class="text-center">
-        <p class="font-display text-2xl text-maroon-dark font-semibold">13.3K</p>
-        <p>Followers</p>
+        <p class="font-display text-3xl sm:text-4xl text-charcoal-dark font-medium">13.3K</p>
+        <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal-light">Followers</p>
       </div>
-      <div class="hidden sm:block w-px h-8 bg-gold/40"></div>
+      <div class="hidden sm:block w-px h-10 bg-champagne/40"></div>
       <div class="text-center">
-        <p class="font-display text-2xl text-maroon-dark font-semibold">Worldwide</p>
-        <p>Shipping</p>
+        <p class="font-display text-3xl sm:text-4xl text-charcoal-dark font-medium">Worldwide</p>
+        <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal-light">Shipping</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Our Craft -->
-<section id="craft" class="px-5 py-16 sm:py-24">
+<section id="craft" class="px-5 py-20 sm:py-28 bg-cream-dark/60 border-t border-champagne/20">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal">
-      <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
-        <span class="font-display text-2xl px-2">✦</span>
-      </div>
-      <h2 class="font-display text-3xl sm:text-4xl font-semibold">Our Craft</h2>
-      <p class="mt-3 text-maroon/70 max-w-xl mx-auto">Every jhula, aasan and toran is handmade with devotion — designed for Thakur ji, finished to last generations.</p>
+      <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-dark">Our Craft</span></div>
+      <h2 class="font-display text-3xl sm:text-5xl font-medium">Three signature forms</h2>
+      <p class="mt-4 text-charcoal-light max-w-xl mx-auto font-light">Every jhula, aasan and toran is handmade with devotion — designed for Thakur ji, finished to last generations.</p>
     </div>
-    <div class="grid sm:grid-cols-3 gap-6">
-      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
-        <img src="assets/images/post-6.jpg" alt="Thakur ji ka jhula" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
-        <h3 class="font-display text-2xl font-semibold mb-2">Jhulas</h3>
-        <p class="text-sm text-maroon/70 leading-relaxed">Ornate swings crafted for Thakur ji, blending intricate embroidery with heirloom-quality finishing.</p>
-      </div>
-      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
-        <img src="assets/images/post-12.jpg" alt="Thakur ji ka aasan" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
-        <h3 class="font-display text-2xl font-semibold mb-2">Aasans</h3>
-        <p class="text-sm text-maroon/70 leading-relaxed">Regal seating sets designed with rich fabrics and fine detailing, fit for daily seva.</p>
-      </div>
-      <div class="reveal bg-white/70 rounded-2xl p-8 text-center border border-gold/20 shadow-sm">
-        <img src="assets/images/post-2.jpg" alt="Radhey Radhey" class="w-16 h-16 object-cover rounded-full mx-auto mb-5 ring-2 ring-gold/50" />
-        <h3 class="font-display text-2xl font-semibold mb-2">Torans</h3>
-        <p class="text-sm text-maroon/70 leading-relaxed">Beautifully draped door and mandir torans that bring festive elegance into every home.</p>
-      </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 lg:grid-rows-2 gap-4 sm:gap-5 lg:h-[640px] reveal">
+      <article class="group relative overflow-hidden rounded-sm lg:col-span-2 lg:row-span-2 h-[420px] lg:h-full">
+        <img src="assets/images/post-6.jpg" alt="Thakur ji ka jhula" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 gallery-overlay"></div>
+        <div class="absolute inset-x-0 bottom-0 p-7 sm:p-9">
+          <span class="text-champagne-light text-[10px] uppercase tracking-[0.25em]">Signature</span>
+          <h3 class="font-display text-3xl sm:text-4xl text-cream font-medium mt-2 mb-3">Jhulas</h3>
+          <p class="text-cream/80 text-sm leading-relaxed max-w-sm font-light">Ornate swings crafted for Thakur ji, blending intricate embroidery with heirloom-quality finishing.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-sm lg:col-span-2 h-[280px] lg:h-full">
+        <img src="assets/images/post-12.jpg" alt="Thakur ji ka aasan" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 gallery-overlay"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+          <span class="text-champagne-light text-[10px] uppercase tracking-[0.25em]">Refined</span>
+          <h3 class="font-display text-2xl sm:text-3xl text-cream font-medium mt-1 mb-2">Aasans</h3>
+          <p class="text-cream/80 text-sm leading-relaxed max-w-sm font-light">Regal seating sets designed with rich fabrics and fine detailing, fit for daily seva.</p>
+        </div>
+      </article>
+
+      <article class="group relative overflow-hidden rounded-sm lg:col-span-2 h-[280px] lg:h-full">
+        <img src="assets/images/post-2.jpg" alt="Radhey Radhey toran" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 gallery-overlay"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+          <span class="text-champagne-light text-[10px] uppercase tracking-[0.25em]">Festive</span>
+          <h3 class="font-display text-2xl sm:text-3xl text-cream font-medium mt-1 mb-2">Torans</h3>
+          <p class="text-cream/80 text-sm leading-relaxed max-w-sm font-light">Beautifully draped door and mandir torans that bring festive elegance into every home.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- Gallery -->
-<section id="gallery" class="px-5 py-16 sm:py-24 bg-white/60">
+<section id="gallery" class="px-5 py-20 sm:py-28 border-t border-champagne/20">
   <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-12 reveal">
-      <div class="flex items-center justify-center gap-4 divider-ornament text-gold mb-6 max-w-xs mx-auto">
-        <span class="font-display text-2xl px-2">✦</span>
-      </div>
-      <h2 class="font-display text-3xl sm:text-4xl font-semibold">Gallery</h2>
-      <p class="mt-3 text-maroon/70 max-w-xl mx-auto">Our latest creations, straight from Instagram.</p>
+    <div class="text-center mb-14 reveal">
+      <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-dark">Gallery</span></div>
+      <h2 class="font-display text-3xl sm:text-5xl font-medium">Our latest creations</h2>
+      <p class="mt-4 text-charcoal-light max-w-xl mx-auto font-light">Straight from Instagram — click any piece to view details.</p>
     </div>
-    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
   </div>
 </section>
 
 <!-- Contact / CTA -->
-<section id="contact" class="px-5 py-20 sm:py-28 bg-maroon-dark text-cream text-center">
+<section id="contact" class="px-5 py-24 sm:py-32 bg-charcoal-dark text-cream text-center">
   <div class="max-w-2xl mx-auto reveal">
-    <h2 class="font-display text-3xl sm:text-4xl font-semibold mb-4">Ready to Order?</h2>
-    <p class="text-cream/80 mb-8 leading-relaxed">DM us on Instagram with your requirements — sizes, colors and custom designs available. Retail only, shipped worldwide.</p>
-    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-maroon-dark font-medium px-8 py-3.5 rounded-full text-sm uppercase tracking-widest transition-colors">
-      Message Us on Instagram
+    <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne">Get in Touch</span></div>
+    <h2 class="font-display text-3xl sm:text-5xl font-medium mb-5">Ready to order?</h2>
+    <p class="text-cream/70 mb-10 leading-relaxed font-light max-w-lg mx-auto">DM us on Instagram with your requirements — sizes, colors and custom designs available. Retail only, shipped worldwide.</p>
+    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+       class="btn-shimmer inline-flex items-center bg-champagne hover:text-charcoal-dark text-charcoal-dark font-medium px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300">
+      <span>Message Us on Instagram</span>
     </a>
   </div>
 </section>
 
+</main>
+
 <!-- Footer -->
-<footer class="px-5 py-10 text-center text-sm text-maroon/60 bg-cream">
-  <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-9 h-9 rounded-full object-cover mx-auto mb-3 ring-1 ring-gold/50" />
-  <p class="font-display text-lg text-maroon-dark mb-1">The Fleur Galerie</p>
-  <p>&copy; <span id="year"></span> The Fleur Galerie. All rights reserved.</p>
+<footer class="px-5 py-12 text-center text-sm text-charcoal-light bg-cream border-t border-champagne/20">
+  <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-9 h-9 rounded-full object-cover mx-auto mb-4 ring-1 ring-champagne/60" />
+  <p class="font-display text-lg text-charcoal-dark tracking-wide mb-1">The Fleur Galerie</p>
+  <p class="text-xs uppercase tracking-[0.2em] text-charcoal-light/70 mb-4">Luxury Krishna Jhulas &amp; Torans</p>
+  <div class="flex items-center justify-center gap-6 text-xs uppercase tracking-[0.15em] mb-6">
+    <a href="#about" class="hover:text-champagne-dark transition-colors">About</a>
+    <a href="#craft" class="hover:text-champagne-dark transition-colors">Craft</a>
+    <a href="#gallery" class="hover:text-champagne-dark transition-colors">Gallery</a>
+    <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="hover:text-champagne-dark transition-colors">Instagram</a>
+  </div>
+  <p class="text-xs text-charcoal-light/60">&copy; <span id="year"></span> The Fleur Galerie. All rights reserved.</p>
 </footer>
 
 <!-- Lightbox -->
-<div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/90 px-4">
-  <button id="lightbox-close" class="absolute top-5 right-5 text-cream text-3xl leading-none hover:text-gold transition-colors" aria-label="Close">&times;</button>
+<div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-charcoal-dark/95 px-4">
+  <button id="lightbox-close" class="absolute top-6 right-6 text-cream text-3xl leading-none hover:text-champagne transition-colors" aria-label="Close">&times;</button>
   <div class="max-w-3xl w-full text-center">
-    <img id="lightbox-img" src="" alt="" class="max-h-[75vh] w-auto mx-auto rounded-lg shadow-2xl" />
-    <p id="lightbox-caption" class="text-cream/90 mt-4 text-sm sm:text-base"></p>
-    <a id="lightbox-link" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-gold hover:text-gold-light text-xs uppercase tracking-widest border border-gold/50 rounded-full px-5 py-2">View on Instagram</a>
+    <img id="lightbox-img" src="" alt="" class="max-h-[72vh] w-auto mx-auto rounded-sm shadow-2xl" />
+    <p id="lightbox-caption" class="text-cream/90 mt-5 text-sm sm:text-base font-light"></p>
+    <a id="lightbox-link" href="#" target="_blank" rel="noopener" class="inline-block mt-5 text-champagne hover:text-champagne-light text-xs uppercase tracking-[0.2em] border-b border-champagne/50 pb-1 transition-all duration-300 hover:tracking-[0.28em]">View on Instagram</a>
   </div>
 </div>
 
@@ -205,14 +241,14 @@
   ];
 
   const grid = document.getElementById('gallery-grid');
-  posts.forEach((post, i) => {
-    const item = document.createElement('div');
-    item.className = 'gallery-item reveal aspect-square rounded-xl cursor-pointer bg-maroon/5';
+  posts.forEach((post) => {
+    const item = document.createElement('article');
+    item.className = 'group relative overflow-hidden rounded-sm cursor-pointer aspect-[4/5] bg-charcoal/5 reveal';
     item.innerHTML = `
-      <img src="${post.img}" alt="${post.caption}" loading="lazy" class="w-full h-full object-cover rounded-xl" />
-      <div class="gallery-overlay absolute inset-0 rounded-xl flex flex-col justify-end p-3 sm:p-4">
-        <span class="text-gold-light text-[10px] uppercase tracking-widest mb-1">${post.type}</span>
-        <p class="text-cream text-xs sm:text-sm leading-snug line-clamp-3">${post.caption}</p>
+      <img src="${post.img}" alt="${post.caption}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <div class="gallery-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col justify-end p-4">
+        <span class="text-champagne-light text-[10px] uppercase tracking-[0.2em] mb-1">${post.type}</span>
+        <p class="text-cream text-xs sm:text-sm leading-snug line-clamp-3 font-light">${post.caption}</p>
       </div>
     `;
     item.addEventListener('click', () => openLightbox(post));
