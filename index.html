@@ -42,9 +42,56 @@
   .reel-frame video { transition: transform 0.7s ease; }
   .reel-frame:not(.playing):hover video { transform: scale(1.05); }
   ::selection { background: #c6a465; color: #faf8f3; }
+
+  /* ---- Diwali ---- */
+  .glow-bg {
+    background-color: #141311;
+    background-image:
+      radial-gradient(ellipse at 50% -8%, rgba(246,180,74,0.24), transparent 55%),
+      radial-gradient(ellipse at 88% 35%, rgba(150,38,38,0.20), transparent 50%),
+      radial-gradient(ellipse at 8% 70%, rgba(198,164,101,0.10), transparent 45%);
+  }
+  .gold-text {
+    background: linear-gradient(100deg, #e6d5ab 0%, #c6a465 38%, #f6e6b4 58%, #c6a465 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .arch-glow { box-shadow: 0 0 80px rgba(246,180,74,0.28), 0 0 0 1px rgba(198,164,101,0.55); }
+  .flame { transform-origin: 50% 92%; animation: flicker 2.4s ease-in-out infinite; filter: drop-shadow(0 0 7px rgba(246,180,74,0.95)); }
+  @keyframes flicker {
+    0%, 100% { transform: scale(1, 1) rotate(-1deg); opacity: 0.95; }
+    25%      { transform: scale(0.94, 1.07) rotate(1.5deg); }
+    50%      { transform: scale(1.05, 0.95) rotate(-1deg); opacity: 1; }
+    75%      { transform: scale(0.97, 1.04) rotate(1deg); }
+  }
+  .sparkle { position: absolute; bottom: -12px; border-radius: 9999px; opacity: 0; background: radial-gradient(circle, #f6d58a 0%, rgba(246,213,138,0) 70%); animation: rise linear infinite; }
+  @keyframes rise {
+    0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+    15%  { opacity: 0.9; }
+    100% { transform: translateY(-95vh) scale(1.15); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flame { animation: none; }
+    .sparkle { display: none; }
+  }
 </style>
 </head>
 <body class="text-charcoal antialiased">
+
+<!-- Shared gradients for the diya icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="flameGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3c4" />
+      <stop offset="0.45" stop-color="#f6b44a" />
+      <stop offset="1" stop-color="#e2711d" />
+    </linearGradient>
+    <linearGradient id="bowlGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6d5ab" />
+      <stop offset="0.5" stop-color="#c6a465" />
+      <stop offset="1" stop-color="#8f6f35" />
+    </linearGradient>
+  </defs>
+</svg>
 
 <!-- Header -->
 <header class="fixed top-0 left-0 right-0 z-50 bg-cream/85 backdrop-blur-md border-b border-champagne/25">
@@ -77,45 +124,121 @@
 <main>
 
 <!-- Hero -->
-<section id="top" class="relative min-h-[92vh] flex items-center justify-center px-5 pt-24 pb-16 overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(198,164,101,0.14),_transparent_60%)]"></div>
-  <div class="max-w-4xl mx-auto text-center">
-    <img src="assets/images/profile.jpg" alt="The Fleur Galerie" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover ring-1 ring-champagne mx-auto mb-8" />
-    <p class="uppercase tracking-[0.4em] text-[11px] sm:text-xs text-champagne-dark font-medium mb-6">@the_fleur_galerie &middot; Est. Direct-to-Consumer</p>
-    <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-medium leading-[1.05] tracking-tight text-charcoal-dark">
-      Luxury Krishna<br />
-      <span class="italic text-champagne-dark">Jhulas</span> &amp; Torans
-    </h1>
-    <p class="mt-8 text-base sm:text-lg text-charcoal-light max-w-xl mx-auto leading-relaxed font-light">
-      Handcrafted devotional artistry for Thakur ji — direct to consumer, shipped worldwide, made to be treasured for generations.
-    </p>
-    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#gallery" class="btn-shimmer w-full sm:w-auto bg-charcoal hover:text-cream text-cream px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300">
-        <span>View Gallery</span>
-      </a>
-      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
-         class="w-full sm:w-auto border border-charcoal/25 hover:border-champagne hover:text-champagne-dark px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.28em]">
-        Follow on Instagram
-      </a>
+<section id="top" class="relative overflow-hidden glow-bg text-cream px-5 pt-28 pb-20 sm:pt-36 sm:pb-28 border-b border-champagne/20">
+  <div id="sparkles" class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+    <div class="text-center lg:text-left">
+      <div class="flex justify-center lg:justify-start gap-2 mb-7" data-diyas="5" aria-hidden="true"></div>
+      <p class="uppercase tracking-[0.35em] text-[11px] sm:text-xs text-champagne-light font-medium mb-5">Shubh Deepavali &middot; The Diwali Edit 2026</p>
+      <h1 class="font-display text-5xl sm:text-6xl xl:text-7xl font-medium leading-[1.06] tracking-tight">
+        Light up your home with <span class="gold-text italic">handcrafted</span> devotion
+      </h1>
+      <p class="mt-7 text-base sm:text-lg text-cream/75 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+        Laxmi&ndash;Ganesh pooja thalis, torans and festive d&eacute;cor &mdash; alongside our luxury Krishna Jhulas. Handcrafted, sent direct to you, shipped worldwide.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+        <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+           class="btn-shimmer w-full sm:w-auto inline-flex items-center justify-center bg-champagne hover:bg-champagne-light text-charcoal-dark font-medium px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
+          <span>Order on Instagram</span>
+        </a>
+        <a href="diwali.html"
+           class="w-full sm:w-auto inline-flex items-center justify-center border border-cream/25 hover:border-champagne hover:text-champagne-light px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
+          Explore the Diwali Edit
+        </a>
+      </div>
+
+      <!-- Countdown -->
+      <div class="mt-12">
+        <p id="countdown-label" class="text-[11px] uppercase tracking-[0.3em] text-cream/55 mb-4">Diwali &middot; Sunday, 8 November 2026</p>
+        <div id="countdown" class="flex justify-center lg:justify-start gap-3 sm:gap-4" role="timer" aria-live="off">
+          <div class="text-center w-16 sm:w-20 py-3 rounded-sm border border-champagne/30 bg-charcoal-dark/50">
+            <p id="cd-days" class="font-display text-2xl sm:text-3xl text-champagne-light">--</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-cream/55 mt-1">Days</p>
+          </div>
+          <div class="text-center w-16 sm:w-20 py-3 rounded-sm border border-champagne/30 bg-charcoal-dark/50">
+            <p id="cd-hours" class="font-display text-2xl sm:text-3xl text-champagne-light">--</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-cream/55 mt-1">Hours</p>
+          </div>
+          <div class="text-center w-16 sm:w-20 py-3 rounded-sm border border-champagne/30 bg-charcoal-dark/50">
+            <p id="cd-mins" class="font-display text-2xl sm:text-3xl text-champagne-light">--</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-cream/55 mt-1">Mins</p>
+          </div>
+          <div class="text-center w-16 sm:w-20 py-3 rounded-sm border border-champagne/30 bg-charcoal-dark/50">
+            <p id="cd-secs" class="font-display text-2xl sm:text-3xl text-champagne-light">--</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-cream/55 mt-1">Secs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arched feature image -->
+    <div class="relative mx-auto w-full max-w-xs sm:max-w-sm">
+      <div class="arch-glow overflow-hidden rounded-t-[999px] rounded-b-sm aspect-[3/4] bg-charcoal">
+        <img src="assets/images/latest-03.jpg" alt="Handcrafted Laxmi&ndash;Ganesh pooja thali with pearl work and tealights" class="w-full h-full object-cover" />
+      </div>
+      <p class="mt-5 text-center text-[11px] uppercase tracking-[0.3em] text-champagne-light">Laxmi&ndash;Ganesh Pooja Thali</p>
     </div>
   </div>
 </section>
 
-<!-- Diwali banner -->
-<a href="diwali.html" class="group relative block overflow-hidden border-y border-champagne/30 bg-charcoal-dark text-cream">
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(246,180,74,0.28),transparent_65%)]"></div>
-  <div class="relative max-w-5xl mx-auto px-5 py-9 sm:py-11 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10 text-center sm:text-left">
-    <svg viewBox="0 0 64 64" class="w-11 h-11 shrink-0" aria-hidden="true">
-      <path d="M32 3C40 15 45 22 45 30a13 13 0 0 1-26 0C19 22 25 15 32 3Z" fill="#f6b44a"/>
-      <path d="M7 38h50c0 11-9 19-25 19S7 49 7 38Z" fill="#c6a465"/>
-    </svg>
-    <div>
-      <p class="text-[11px] uppercase tracking-[0.3em] text-champagne-light mb-1">Shubh Deepavali &middot; 8 November 2026</p>
-      <p class="font-display text-2xl sm:text-3xl">Explore our Diwali Edit</p>
+<!-- The Diwali Edit -->
+<section id="edit" class="px-5 py-20 sm:py-28 bg-[#1a1815] text-cream border-b border-champagne/20">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-light">The Diwali Edit</span></div>
+      <h2 class="font-display text-3xl sm:text-5xl font-medium">Made for your Diwali puja</h2>
+      <p class="mt-4 text-cream/65 max-w-xl mx-auto font-light">A few of our newest festive pieces. Tap any to watch the reel on Instagram.</p>
     </div>
-    <span class="inline-flex items-center bg-champagne group-hover:bg-champagne-light text-charcoal-dark text-xs uppercase tracking-[0.2em] px-8 py-3.5 rounded-full transition-all duration-300 group-hover:tracking-[0.26em]">View the Edit &rarr;</span>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <article class="reveal group relative overflow-hidden rounded-sm aspect-[3/4] bg-charcoal">
+        <img src="assets/images/latest-03.jpg" alt="Laxmi&ndash;Ganesh pooja thali" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/90 via-charcoal-dark/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+          <h3 class="font-display text-lg sm:text-xl leading-tight">Pooja Thalis</h3>
+          <p class="hidden sm:block mt-1 text-sm text-cream/75 font-light leading-snug">Laxmi&ndash;Ganesh thalis with pearl and stone work and tealights.</p>
+          <a href="https://www.instagram.com/reel/DegpunuzzRa/" target="_blank" rel="noopener" class="mt-3 inline-block text-[10px] uppercase tracking-[0.2em] text-champagne-light border-b border-champagne/50 pb-0.5 hover:tracking-[0.28em] transition-all duration-300">Watch the reel &nearr;</a>
+        </div>
+      </article>
+
+      <article class="reveal group relative overflow-hidden rounded-sm aspect-[3/4] bg-charcoal">
+        <img src="assets/images/latest-02.jpg" alt="Floral and mirror-work toran with beaded latkans" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/90 via-charcoal-dark/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+          <h3 class="font-display text-lg sm:text-xl leading-tight">Torans</h3>
+          <p class="hidden sm:block mt-1 text-sm text-cream/75 font-light leading-snug">Floral, mirror-work and beaded torans to welcome Lakshmi at your door.</p>
+          <a href="https://www.instagram.com/reel/DeoxoqjzL44/" target="_blank" rel="noopener" class="mt-3 inline-block text-[10px] uppercase tracking-[0.2em] text-champagne-light border-b border-champagne/50 pb-0.5 hover:tracking-[0.28em] transition-all duration-300">Watch the reel &nearr;</a>
+        </div>
+      </article>
+
+      <article class="reveal group relative overflow-hidden rounded-sm aspect-[3/4] bg-charcoal">
+        <img src="assets/images/latest-01.jpg" alt="Peacock and lotus d&eacute;cor hangings in gold and pearls" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/90 via-charcoal-dark/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+          <h3 class="font-display text-lg sm:text-xl leading-tight">D&eacute;cor Hangings</h3>
+          <p class="hidden sm:block mt-1 text-sm text-cream/75 font-light leading-snug">Peacock and lotus pieces in gold gota and pearls.</p>
+          <a href="https://www.instagram.com/reel/DerKuY7ThR3/" target="_blank" rel="noopener" class="mt-3 inline-block text-[10px] uppercase tracking-[0.2em] text-champagne-light border-b border-champagne/50 pb-0.5 hover:tracking-[0.28em] transition-all duration-300">Watch the reel &nearr;</a>
+        </div>
+      </article>
+
+      <article class="reveal group relative overflow-hidden rounded-sm aspect-[3/4] bg-charcoal">
+        <img src="assets/images/latest-04.jpg" alt="Floral and diya d&eacute;cor platters with mirror work" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/90 via-charcoal-dark/10 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+          <h3 class="font-display text-lg sm:text-xl leading-tight">Diya &amp; Floral Platters</h3>
+          <p class="hidden sm:block mt-1 text-sm text-cream/75 font-light leading-snug">Mirror-work platters for your pooja space and rangoli corners.</p>
+          <a href="https://www.instagram.com/reel/DeegAhzzuUo/" target="_blank" rel="noopener" class="mt-3 inline-block text-[10px] uppercase tracking-[0.2em] text-champagne-light border-b border-champagne/50 pb-0.5 hover:tracking-[0.28em] transition-all duration-300">Watch the reel &nearr;</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="reveal mt-12 text-center">
+      <a href="diwali.html" class="inline-block text-xs uppercase tracking-[0.2em] text-champagne-light border-b border-champagne/50 pb-1 hover:tracking-[0.28em] hover:border-champagne transition-all duration-300">See the full Diwali page &rarr;</a>
+    </div>
   </div>
-</a>
+</section>
 
 <!-- About -->
 <section id="about" class="px-5 py-20 sm:py-28 border-t border-champagne/20">
@@ -275,6 +398,56 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Diwali: diya icons (flame flickers via CSS) ----
+  const diyaSvg = (delay) => `
+    <svg viewBox="0 0 64 64" class="w-8 h-8 sm:w-10 sm:h-10" aria-hidden="true">
+      <path class="flame" style="animation-delay:${delay}s" d="M32 3C40 15 45 22 45 30a13 13 0 0 1-26 0C19 22 25 15 32 3Z" fill="url(#flameGrad)"/>
+      <path d="M7 38h50c0 11-9 19-25 19S7 49 7 38Z" fill="url(#bowlGrad)"/>
+    </svg>`;
+  document.querySelectorAll('[data-diyas]').forEach((el) => {
+    const n = Number(el.dataset.diyas) || 3;
+    el.innerHTML = Array.from({ length: n }, (_, i) => diyaSvg((i * 0.55).toFixed(2))).join('');
+  });
+
+  // ---- Diwali: rising sparkles in the hero ----
+  const sparkleBox = document.getElementById('sparkles');
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span');
+    const size = 4 + Math.random() * 8;
+    s.className = 'sparkle';
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.width = s.style.height = size + 'px';
+    s.style.animationDuration = (9 + Math.random() * 9) + 's';
+    s.style.animationDelay = (-Math.random() * 14) + 's';
+    sparkleBox.appendChild(s);
+  }
+
+  // ---- Diwali: countdown to Sunday, 8 November 2026 (IST) ----
+  const diwaliAt = new Date('2026-11-08T00:00:00+05:30').getTime();
+  const pad = (n) => String(n).padStart(2, '0');
+  const cd = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs'),
+  };
+  function tick() {
+    const diff = diwaliAt - Date.now();
+    if (diff <= 0) {
+      document.getElementById('countdown').classList.add('hidden');
+      document.getElementById('countdown-label').textContent = 'Happy Diwali ✨ Shubh Deepavali';
+      return false;
+    }
+    cd.days.textContent = pad(Math.floor(diff / 86400000));
+    cd.hours.textContent = pad(Math.floor(diff / 3600000) % 24);
+    cd.mins.textContent = pad(Math.floor(diff / 60000) % 60);
+    cd.secs.textContent = pad(Math.floor(diff / 1000) % 60);
+    return true;
+  }
+  if (tick()) {
+    const timer = setInterval(() => { if (!tick()) clearInterval(timer); }, 1000);
+  }
 
   const posts = [
     { img: 'assets/images/post-13.jpg', caption: '#thefleurgalerie Radhey Radhey', permalink: 'https://www.instagram.com/reel/Db-z2b_pTB4/', type: 'Reel' },
