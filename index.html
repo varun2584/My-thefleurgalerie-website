@@ -39,6 +39,8 @@
   .btn-shimmer span { position: relative; z-index: 1; }
   .btn-shimmer::after { content: ''; position: absolute; inset: 0; background: currentColor; opacity: 0; transition: opacity 0.4s ease; }
   .gallery-overlay { background: linear-gradient(to top, rgba(20,19,17,0.9) 0%, rgba(20,19,17,0.15) 60%, transparent 100%); }
+  .reel-frame video { transition: transform 0.7s ease; }
+  .reel-frame:not(.playing):hover video { transform: scale(1.05); }
   ::selection { background: #c6a465; color: #faf8f3; }
 </style>
 </head>
@@ -60,6 +62,8 @@
     <div class="flex items-center justify-end gap-8">
       <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.2em] text-charcoal-light">
         <a href="#gallery" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Gallery</a>
+        <a href="#reels" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Reels</a>
+        <a href="diwali.html" class="text-champagne-dark hover:tracking-[0.28em] transition-all duration-300">Diwali</a>
         <a href="#contact" class="hover:text-champagne-dark transition-all duration-300 hover:tracking-[0.28em]">Order</a>
       </nav>
       <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
@@ -183,6 +187,22 @@
   </div>
 </section>
 
+<!-- Reels -->
+<section id="reels" class="px-5 py-20 sm:py-28 bg-cream-dark/60 border-t border-champagne/20">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-dark">Reels</span></div>
+      <h2 class="font-display text-3xl sm:text-5xl font-medium">Watch our work</h2>
+      <p class="mt-4 text-charcoal-light max-w-xl mx-auto font-light">Fresh from Instagram — tap any reel to play.</p>
+    </div>
+    <div id="reels-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6"></div>
+    <div class="text-center mt-14 reveal">
+      <a href="https://www.instagram.com/the_fleur_galerie/reels/" target="_blank" rel="noopener"
+         class="inline-block text-xs uppercase tracking-[0.2em] text-champagne-dark border-b border-champagne/50 pb-1 hover:tracking-[0.28em] hover:border-champagne transition-all duration-300">More reels on Instagram</a>
+    </div>
+  </div>
+</section>
+
 <!-- Contact / CTA -->
 <section id="contact" class="px-5 py-24 sm:py-32 bg-charcoal-dark text-cream text-center">
   <div class="max-w-2xl mx-auto reveal">
@@ -219,6 +239,8 @@
     <a href="#about" class="hover:text-champagne-dark transition-colors">About</a>
     <a href="#craft" class="hover:text-champagne-dark transition-colors">Craft</a>
     <a href="#gallery" class="hover:text-champagne-dark transition-colors">Gallery</a>
+    <a href="#reels" class="hover:text-champagne-dark transition-colors">Reels</a>
+    <a href="diwali.html" class="text-champagne-dark hover:text-charcoal-dark transition-colors">Diwali</a>
     <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener" class="hover:text-champagne-dark transition-colors">Instagram</a>
     <a href="privacy-policy.html" class="hover:text-champagne-dark transition-colors">Privacy Policy</a>
   </div>
@@ -290,6 +312,62 @@
   document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Reels hosted on this site (newest first). Instagram doesn't expose the video file for
+  // reels with licensed audio, so only reels whose file came through are listed here.
+  const reels = [
+    { video: 'assets/videos/reel-01.mp4', poster: 'assets/images/reel-01.jpg', date: 'Oct 15, 2026', permalink: 'https://www.instagram.com/reel/Deg-bPfzeq5/' },
+    { video: 'assets/videos/reel-02.mp4', poster: 'assets/images/reel-02.jpg', date: 'Oct 10, 2026', permalink: 'https://www.instagram.com/reel/DeTZ3mXToip/' },
+    { video: 'assets/videos/reel-03.mp4', poster: 'assets/images/reel-03.jpg', date: 'Oct 7, 2026', permalink: 'https://www.instagram.com/reel/DeMZBprIdA8/' },
+    { video: 'assets/videos/reel-04.mp4', poster: 'assets/images/reel-04.jpg', date: 'Sep 7, 2026', permalink: 'https://www.instagram.com/reel/Dc-qfVFzFUM/' },
+    { video: 'assets/videos/reel-05.mp4', poster: 'assets/images/reel-05.jpg', date: 'Sep 1, 2026', permalink: 'https://www.instagram.com/reel/Dcvt2phoGwW/' },
+    { video: 'assets/videos/reel-06.mp4', poster: 'assets/images/reel-06.jpg', date: 'Aug 30, 2026', permalink: 'https://www.instagram.com/reel/DcqgBW2JSfH/' },
+  ];
+
+  const reelsGrid = document.getElementById('reels-grid');
+  const reelVideos = [];
+  reels.forEach((reel) => {
+    const card = document.createElement('article');
+    card.className = 'reveal';
+    card.innerHTML = `
+      <div class="reel-frame group relative overflow-hidden rounded-sm bg-charcoal-dark aspect-[9/16]">
+        <video src="${reel.video}" poster="${reel.poster}" preload="none" playsinline class="w-full h-full object-cover"></video>
+        <button type="button" class="reel-play absolute inset-0 flex items-center justify-center" aria-label="Play reel from ${reel.date}">
+          <span class="flex items-center justify-center w-16 h-16 rounded-full border border-champagne/80 bg-charcoal-dark/50 backdrop-blur-sm text-cream transition-transform duration-500 group-hover:scale-110">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 ml-0.5"><path d="M8 5.14v13.72a1 1 0 001.5.86l11-6.86a1 1 0 000-1.72l-11-6.86A1 1 0 008 5.14z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="mt-3 flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between text-[11px] uppercase tracking-[0.2em] text-charcoal-light whitespace-nowrap">
+        <span>${reel.date}</span>
+        <a href="${reel.permalink}" target="_blank" rel="noopener" class="hover:text-champagne-dark transition-colors">Instagram &nearr;</a>
+      </div>
+    `;
+    const frame = card.querySelector('.reel-frame');
+    const video = card.querySelector('video');
+    const playBtn = card.querySelector('.reel-play');
+
+    playBtn.addEventListener('click', () => {
+      video.controls = true;
+      frame.classList.add('playing');
+      playBtn.classList.add('hidden');
+      video.play();
+    });
+    // Only one reel plays at a time.
+    video.addEventListener('play', () => {
+      reelVideos.forEach((v) => { if (v !== video) v.pause(); });
+    });
+    // When a reel finishes, return to the poster + play button.
+    video.addEventListener('ended', () => {
+      video.controls = false;
+      video.currentTime = 0;
+      frame.classList.remove('playing');
+      playBtn.classList.remove('hidden');
+    });
+
+    reelVideos.push(video);
+    reelsGrid.appendChild(card);
+  });
 
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
