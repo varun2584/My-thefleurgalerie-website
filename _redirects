@@ -1,0 +1,8 @@
+# Short links for the Model Town exhibition.
+# QR codes are printed with these short addresses, so the destination can be changed later without reprinting.
+
+# Standee QR -> Diwali page, tagged so analytics can tell standee scans apart from other visitors
+/stall   /diwali?utm_source=standee&utm_medium=qr&utm_campaign=model_town_diwali_2026   302
+
+# Counter QR -> opens a WhatsApp chat with the business, message pre-filled
+/chat    https://wa.me/918146250077?text=Hi%20The%20Fleur%20Galerie%2C%20please%20send%20me%20the%20Diwali%20catalogue   302

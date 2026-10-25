@@ -72,6 +72,13 @@
   /* Arched hero frame glow */
   .arch-glow { box-shadow: 0 0 80px rgba(246,180,74,0.28), 0 0 0 1px rgba(198,164,101,0.55); }
 
+  /* Sign-up form (dark theme) */
+  .field-d { width: 100%; background: rgba(250,248,243,0.06); border: 1px solid rgba(198,164,101,0.35); border-radius: 0.125rem; padding: 0.85rem 1rem; font-size: 0.95rem; color: #faf8f3; transition: border-color .2s ease, box-shadow .2s ease; }
+  .field-d::placeholder { color: rgba(250,248,243,0.4); }
+  .field-d:focus { outline: none; border-color: #c6a465; box-shadow: 0 0 0 3px rgba(198,164,101,0.2); }
+  select.field-d option { background: #1a1815; color: #faf8f3; }
+  .label-d { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(250,248,243,0.65); margin-bottom: 0.5rem; font-weight: 500; }
+
   /* Reel players */
   .reel-frame video { transition: transform 0.7s ease; }
   .reel-frame:not(.playing):hover video { transform: scale(1.05); }
@@ -140,13 +147,13 @@
       </p>
 
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-        <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+        <a href="https://wa.me/918146250077?text=Hi%20The%20Fleur%20Galerie%2C%20please%20send%20me%20the%20Diwali%20catalogue" target="_blank" rel="noopener"
            class="btn-shimmer w-full sm:w-auto inline-flex items-center justify-center bg-champagne hover:bg-champagne-light text-charcoal-dark font-medium px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
-          <span>Order on Instagram</span>
+          <span>Get the Catalogue on WhatsApp</span>
         </a>
-        <a href="#watch"
+        <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
            class="w-full sm:w-auto inline-flex items-center justify-center border border-cream/25 hover:border-champagne hover:text-champagne-light px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
-          Watch the Diwali Edit
+          Order on Instagram
         </a>
       </div>
 
@@ -282,6 +289,60 @@
   </div>
 </section>
 
+<!-- Sign-up (stall visitors who scan the standee) -->
+<section id="notify" class="px-5 py-20 sm:py-28 border-t border-champagne/15 bg-[#1a1815]">
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <div class="ornament text-champagne mb-7"><span class="font-display italic text-lg text-champagne-light">Stay in the glow</span></div>
+      <h2 class="font-display text-3xl sm:text-5xl font-medium">Be first to see what&rsquo;s next</h2>
+      <p class="mt-4 text-cream/65 font-light max-w-lg mx-auto">Leave your WhatsApp number and we&rsquo;ll share new festive collections and early access for Diwali 2027. No spam &mdash; opt out any time.</p>
+    </div>
+
+    <!-- Netlify Forms: detected from this static HTML at deploy time -->
+    <form id="signup-form" name="diwali-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="reveal space-y-5 border border-champagne/25 rounded-sm p-6 sm:p-9 bg-charcoal-dark/40">
+      <input type="hidden" name="form-name" value="diwali-signup" />
+      <input type="hidden" name="source" value="diwali-page" />
+      <p class="hidden"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="label-d" for="su-name">Your name *</label>
+          <input class="field-d" id="su-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div>
+          <label class="label-d" for="su-wa">WhatsApp number *</label>
+          <input class="field-d" id="su-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" pattern="[+0-9][0-9 \-]{7,18}" title="Enter a phone number with country code, e.g. +91 98765 43210" required />
+        </div>
+      </div>
+      <div>
+        <label class="label-d" for="su-interest">What are you most interested in?</label>
+        <select class="field-d" id="su-interest" name="interest">
+          <option value="" selected>A bit of everything</option>
+          <option>Pooja thalis</option>
+          <option>Torans</option>
+          <option>Krishna Jhulas &amp; Aasans</option>
+          <option>D&eacute;cor hangings</option>
+          <option>Diya &amp; floral platters</option>
+        </select>
+      </div>
+      <label class="flex items-start gap-3 text-sm text-cream/70 font-light leading-relaxed cursor-pointer">
+        <input type="checkbox" name="consent" value="yes" required class="mt-1 h-4 w-4 accent-[#c6a465]" />
+        <span>I agree to receive updates from The Fleur Galerie on WhatsApp. I can opt out any time. See our <a href="privacy-policy.html" class="underline hover:text-champagne-light">Privacy Policy</a>.</span>
+      </label>
+      <button id="signup-submit" type="submit" class="btn-shimmer w-full inline-flex items-center justify-center bg-champagne hover:bg-champagne-light text-charcoal-dark font-medium px-9 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em] disabled:opacity-60 disabled:cursor-not-allowed">
+        <span>Keep Me Posted</span>
+      </button>
+      <p id="signup-error" class="hidden text-sm text-red-300 text-center leading-relaxed"></p>
+    </form>
+
+    <div id="signup-success" class="hidden text-center border border-champagne/25 rounded-sm p-9 sm:p-12 bg-charcoal-dark/40">
+      <div class="flex justify-center gap-2 mb-6" data-diyas="3" aria-hidden="true"></div>
+      <h3 class="font-display text-3xl font-medium mb-3">Thank you</h3>
+      <p class="text-cream/70 font-light leading-relaxed max-w-md mx-auto">You&rsquo;re on the list. We&rsquo;ll be in touch on WhatsApp with what&rsquo;s new. Shubh Deepavali!</p>
+    </div>
+  </div>
+</section>
+
 <!-- Closing CTA -->
 <section id="contact" class="relative overflow-hidden glow-bg px-5 py-24 sm:py-32 border-t border-champagne/15 text-center">
   <div class="relative max-w-2xl mx-auto reveal">
@@ -289,13 +350,13 @@
     <h2 class="font-display text-3xl sm:text-5xl font-medium mb-5">Wishing you a <span class="gold-text italic">Diwali</span> full of light</h2>
     <p class="text-cream/70 mb-10 leading-relaxed font-light max-w-lg mx-auto">From all of us at The Fleur Galerie &mdash; Shubh Deepavali. DM us to bring home something handcrafted for your celebration.</p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
+      <a href="https://wa.me/918146250077?text=Hi%20The%20Fleur%20Galerie%2C%20I%27d%20like%20to%20order" target="_blank" rel="noopener"
          class="btn-shimmer inline-flex items-center justify-center w-full sm:w-auto bg-champagne hover:bg-champagne-light text-charcoal-dark font-medium px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
-        <span>Message Us on Instagram</span>
+        <span>Chat on WhatsApp</span>
       </a>
-      <a href="mailto:blazencrafts7@gmail.com"
+      <a href="https://www.instagram.com/the_fleur_galerie/" target="_blank" rel="noopener"
          class="inline-flex items-center justify-center w-full sm:w-auto border border-cream/25 hover:border-champagne hover:text-champagne-light px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:tracking-[0.26em]">
-        Email Us
+        Message Us on Instagram
       </a>
     </div>
     <p class="mt-6 text-cream/55 text-sm font-light">
@@ -438,6 +499,35 @@
       <span class="mt-3 text-[11px] uppercase tracking-[0.2em] text-champagne-light transition-all duration-300 group-hover:tracking-[0.28em]">Watch on Instagram &nearr;</span>
     </a>`;
   reelsGrid.appendChild(moreReels);
+
+  // ---- Sign-up form (Netlify Forms) ----
+  (function () {
+    const form = document.getElementById('signup-form');
+    const btn = document.getElementById('signup-submit');
+    const errorEl = document.getElementById('signup-error');
+    const successEl = document.getElementById('signup-success');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+      btn.disabled = true;
+      const label = btn.querySelector('span');
+      const original = label.textContent;
+      label.textContent = 'Sending…';
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+        if (!res.ok) throw new Error('Request failed: ' + res.status);
+        form.classList.add('hidden');
+        successEl.classList.remove('hidden');
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        errorEl.textContent = 'Sorry, that didn’t go through. Please message us on WhatsApp instead.';
+        errorEl.classList.remove('hidden');
+        btn.disabled = false;
+        label.textContent = original;
+      }
+    });
+  })();
 
   // ---- Scroll reveal ----
   const observer = new IntersectionObserver((entries) => {
