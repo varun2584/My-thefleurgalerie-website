@@ -4,5 +4,9 @@
 # Standee QR -> Diwali page, tagged so analytics can tell standee scans apart from other visitors
 /stall   /diwali?utm_source=standee&utm_medium=qr&utm_campaign=model_town_diwali_2026   302
 
-# Counter QR -> opens a WhatsApp chat with the business, message pre-filled
-/chat    https://wa.me/918146250077?text=Hi%20The%20Fleur%20Galerie%2C%20please%20send%20me%20the%20Diwali%20catalogue   302
+# Counter QR + "Watch our Diwali video" button -> the latest Diwali reel on Instagram (posted 23 Oct 2026).
+# When a newer reel is posted, change the link on the line below (and the /chat line) to point at it.
+/watch   https://www.instagram.com/reel/De1cCfdzU0L/   302
+
+# Older counter-card address: also goes to the reel instead of a WhatsApp chat
+/chat    https://www.instagram.com/reel/De1cCfdzU0L/   302
