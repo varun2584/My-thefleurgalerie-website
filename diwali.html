@@ -6,6 +6,15 @@
 <title>Diwali Edit 2026 | The Fleur Galerie</title>
 <meta name="description" content="Celebrate Diwali with The Fleur Galerie — handcrafted Laxmi–Ganesh pooja thalis, torans and festive décor. Direct to you, shipped worldwide." />
 <link rel="icon" href="assets/images/profile.jpg" type="image/jpeg" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8VZM9RNS7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E8VZM9RNS7');
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -517,6 +526,8 @@
         const body = new URLSearchParams(new FormData(form)).toString();
         const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
         if (!res.ok) throw new Error('Request failed: ' + res.status);
+        // Count the sign-up in Google Analytics (no personal details are sent).
+        if (window.gtag) gtag('event', 'generate_lead', { form_name: 'diwali_signup' });
         form.classList.add('hidden');
         successEl.classList.remove('hidden');
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });

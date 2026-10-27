@@ -7,6 +7,15 @@
 <meta name="description" content="Trade and reseller enquiries for The Fleur Galerie — handcrafted luxury Krishna Jhulas, Aasans, Torans and festive décor." />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" href="assets/images/profile.jpg" type="image/jpeg" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E8VZM9RNS7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E8VZM9RNS7');
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,6 +209,8 @@
       const body = new URLSearchParams(new FormData(form)).toString();
       const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
       if (!res.ok) throw new Error('Request failed: ' + res.status);
+      // Count the enquiry in Google Analytics (no personal details are sent).
+      if (window.gtag) gtag('event', 'generate_lead', { form_name: 'reseller_enquiry' });
       form.classList.add('hidden');
       successEl.classList.remove('hidden');
       successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
