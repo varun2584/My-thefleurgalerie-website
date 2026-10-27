@@ -204,7 +204,29 @@
       successEl.classList.remove('hidden');
       successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (err) {
-      errorEl.textContent = 'Sorry, that didn’t go through. Please message us on WhatsApp or email blazencrafts7@gmail.com instead.';
+      // If the form can't be saved, don't lose the enquiry: offer to send the same details on WhatsApp.
+      const val = (n) => (form.elements[n] ? form.elements[n].value.trim() : '');
+      const interests = Array.from(form.querySelectorAll('input[name=interests]:checked')).map((i) => i.value).join(', ');
+      const lines = [
+        'Hi The Fleur Galerie, I\'d like to enquire about stocking your pieces.',
+        'Name: ' + val('name'),
+        'Business: ' + val('business') + (val('business_type') ? ' (' + val('business_type') + ')' : ''),
+        'City: ' + val('city'),
+        'WhatsApp: ' + val('whatsapp'),
+        val('links') && 'Website/Instagram: ' + val('links'),
+        interests && 'Interested in: ' + interests,
+        val('quantity') && 'Quantity: ' + val('quantity'),
+        val('timeline') && 'Timeline: ' + val('timeline'),
+        val('message') && 'Note: ' + val('message')
+      ].filter(Boolean);
+      const link = document.createElement('a');
+      link.href = 'https://wa.me/918146250077?text=' + encodeURIComponent(lines.join('\n'));
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'underline font-medium';
+      link.textContent = 'Tap here to send your details on WhatsApp instead';
+      errorEl.textContent = 'Sorry, our enquiry form had a hiccup. ';
+      errorEl.appendChild(link);
       errorEl.classList.remove('hidden');
       submitBtn.disabled = false;
       submitBtn.textContent = original;

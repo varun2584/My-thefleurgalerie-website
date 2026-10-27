@@ -521,7 +521,18 @@
         successEl.classList.remove('hidden');
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
-        errorEl.textContent = 'Sorry, that didn’t go through. Please message us on WhatsApp instead.';
+        // If the form can't be saved, don't lose the lead: offer to send the same details on WhatsApp.
+        const val = (n) => (form.elements[n] ? form.elements[n].value.trim() : '');
+        const msg = 'Hi The Fleur Galerie, please keep me posted on new collections.\nName: ' + val('name') +
+                    '\nMy number: ' + val('whatsapp') + '\nInterested in: ' + (val('interest') || 'a bit of everything');
+        const link = document.createElement('a');
+        link.href = 'https://wa.me/918146250077?text=' + encodeURIComponent(msg);
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.className = 'underline text-champagne-light';
+        link.textContent = 'Tap here to send your details on WhatsApp instead';
+        errorEl.textContent = 'Sorry, our sign-up form had a hiccup. ';
+        errorEl.appendChild(link);
         errorEl.classList.remove('hidden');
         btn.disabled = false;
         label.textContent = original;
